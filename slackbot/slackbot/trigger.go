@@ -9,7 +9,7 @@ import (
 )
 
 // Trigger starts an independent watcher build.
-func Trigger(ctx context.Context, build string, webhook string) {
+func Trigger(ctx context.Context, build string, webhook string, timeout string) {
 	svc := gcbClient(ctx)
 	b := &cloudbuild.Build{
 		Steps: []*cloudbuild.BuildStep{
@@ -23,6 +23,7 @@ func Trigger(ctx context.Context, build string, webhook string) {
 			},
 		},
 		Tags: []string{"slackbot"},
+		Timeout: timeout,
 	}
 
 	project, err := getProject()

@@ -14,6 +14,7 @@ var (
 	build   = flag.String("build", "", "Build ID being monitored")
 	webhook = flag.String("webhook", "", "Slack webhook URL")
 	mode    = flag.String("mode", "trigger", "Mode the builder runs in")
+	timeout  = flag.String("timeout", "600", "Timeout for Slackbot monitor")
 )
 
 func main() {
@@ -32,7 +33,7 @@ func main() {
 	if *mode == "trigger" {
 		// Trigger another build to run the monitor.
 		log.Printf("Starting trigger mode for build %s", *build)
-		slackbot.Trigger(ctx, *build, *webhook)
+		slackbot.Trigger(ctx, *build, *webhook, *timeout)
 		return
 	}
 	if *mode == "monitor" {
