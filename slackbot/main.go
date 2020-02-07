@@ -11,10 +11,10 @@ import (
 )
 
 var (
-	build   = flag.String("build", "", "Build ID being monitored")
-	webhook = flag.String("webhook", "", "Slack webhook URL")
-	mode    = flag.String("mode", "trigger", "Mode the builder runs in")
-	timeout  = flag.String("timeout", "600", "Timeout for Slackbot monitor")
+	build    = flag.String("build", "", "Build ID being monitored")
+	webhook  = flag.String("webhook", "", "Slack webhook URL")
+	mode     = flag.String("mode", "trigger", "Mode the builder runs in")
+	timeout  = flag.String("timeout", "600s", "Timeout for Slackbot monitor")
 )
 
 func main() {
