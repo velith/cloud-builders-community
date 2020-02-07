@@ -8,7 +8,7 @@ RUN go install /go/src/main.go
 
 FROM alpine:latest
 
-RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache ca-certificates bash
 
 COPY --from=build-env /go/bin/main /go/bin/main
 
