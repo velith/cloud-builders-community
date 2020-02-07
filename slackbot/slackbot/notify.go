@@ -16,7 +16,7 @@ func Notify(b *cloudbuild.Build, webhook string) {
 	var i string
 	switch b.Status {
 	case "SUCCESS":
-		i = ":white_check_mark:"
+		i = ":heavy_check_mark::party_parrot:"
 	case "FAILURE", "CANCELLED":
 		i = ":x:"
 	case "STATUS_UNKNOWN", "INTERNAL_ERROR":
@@ -25,7 +25,7 @@ func Notify(b *cloudbuild.Build, webhook string) {
 		i = ":question:"
 	}
 	j := fmt.Sprintf(
-		`{"text": "Cloud Build %s complete: %s %s",
+		`{"text": "Cloud Build on branch *%s* complete: %s %s",
 		    "attachments": [
 				{
 					"fallback": "Open build details at %s",
@@ -37,7 +37,7 @@ func Notify(b *cloudbuild.Build, webhook string) {
 						}
 					]
 				}
-			]}`, b.Id, i, b.Status, url, url)
+			]}`, b.Substitutions["BRANCH_NAME"], i, b.Status, url, url)
 
 	r := strings.NewReader(j)
 	resp, err := http.Post(webhook, "application/json", r)
